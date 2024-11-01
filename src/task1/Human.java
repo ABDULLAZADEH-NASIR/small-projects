@@ -1,7 +1,8 @@
-import javax.crypto.spec.PSource;
+package task1;
+
+import task2.Pet;
+
 import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
 
 public class Human {
     public String name;
@@ -14,12 +15,12 @@ public class Human {
     public String[][] schedule={};
 
 
-    public Human(String name,String surname,int dateYear){
+    public Human(String name, String surname, int dateYear){
       this.name=name;
       this.surname=surname;
       this.dateYear=dateYear;
     }
-    public Human(String name,String surname,int dateYear,int IQLevel,Human father,Human mother){
+    public Human(String name, String surname, int dateYear, int IQLevel, Human father, Human mother){
         this.name=name;
         this.surname=surname;
         this.dateYear=dateYear;
@@ -32,14 +33,14 @@ public class Human {
     }
 
     public void greetPet() {
-        System.out.println("Hello, " + pet.nickname);
+        System.out.println("Hello, " + pet.getNickname());
     }
 
     public void describePet() {
-        if (pet.trickLevel>50) {
-            System.out.println("I have " + pet.species + ",he is " + pet.age + " years old, he is very sly");
+        if (pet.getTrickLevel()>50) {
+            System.out.println("I have " + pet.getSpecies() + ",he is " + pet.getAge() + " years old, he is very sly");
         } else {
-            System.out.println("I have " + pet.species + ",he is " + pet.age + " years old, almost not sly");
+            System.out.println("I have " + pet.getSpecies() + ",he is " + pet.getAge() + " years old, almost not sly");
         }
     }
 
@@ -48,9 +49,9 @@ public class Human {
         return "Human {name="+name+", Surname="+surname+", " +
                 "year="+dateYear+", iq= "+IQLevel+", " +
                 "mother="+mother.name+" "+father.surname+", father="+father.name+" "+father.surname+", " +
-                "pet="+pet.species+" {nickname="+pet.nickname+", " +
-                "age="+pet.age+", trciklevel="+pet.trickLevel+", " +
-                "habits="+ Arrays.toString(pet.habits)+"}";
+                "pet="+pet.getSpecies()+" {nickname="+pet.getNickname()+", " +
+                "age="+pet.getAge()+", trciklevel="+pet.getTrickLevel()+", " +
+                "habits="+ Arrays.toString(pet.getHabits())+"}";
     }
 
 
