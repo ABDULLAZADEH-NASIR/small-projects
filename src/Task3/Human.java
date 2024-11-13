@@ -2,6 +2,7 @@ package Task3;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Human {
 
@@ -25,15 +26,14 @@ public class Human {
     }
 
     public  void setName(String name) {
-        String  regex="[a-zA-Z]";
-        StringBuilder result=new StringBuilder();
 
-        for(char c: name.toCharArray()){
-            if(String.valueOf(c).matches(regex)){
-                result.append(c);
-            }
+        boolean suitable=Pattern.compile("^[a-zA-Z]+$").matcher(name).matches();
+        if(suitable){
+            this.name=name;
         }
-           this.name= String.valueOf(result);
+        else {
+            System.out.println("Invalid name ");
+        }
     }
 
     public String getSurname() {
@@ -41,15 +41,14 @@ public class Human {
     }
 
     public void setSurname(String surname) {
-        String  regex="[a-zA-Z]";
-        StringBuilder result=new StringBuilder();
+        boolean suitable=Pattern.compile("^[a=zA-Z]+$").matcher(surname).matches();
 
-        for(char c: surname.toCharArray()){
-            if(String.valueOf(c).matches(regex)){
-                result.append(c);
-            }
+        if(suitable){
+            this.surname=surname;
         }
-        this.surname= String.valueOf(result);
+        else {
+            System.out.println("Invalid username ");
+        }
     }
 
     public int getDateYear() {

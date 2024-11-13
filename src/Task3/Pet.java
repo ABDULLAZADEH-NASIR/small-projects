@@ -2,6 +2,7 @@ package Task3;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 public  class Pet {
     static {
@@ -41,15 +42,13 @@ public  class Pet {
     }
 
     public void setNickname(String nickname) {
-        StringBuilder s=new StringBuilder();
-        String regex="[a-zA-Z]";
-
-        for(char c:nickname.toCharArray()){
-            if(String.valueOf(c).matches(regex)){
-                s.append(c);
-            }
+       boolean suitable= Pattern.compile("^[a-zA-Z]+$").matcher(nickname).matches();
+        if (suitable) {
+            this.nickname=nickname;
         }
-        this.nickname= String.valueOf(s);
+        else {
+            System.out.println("Invalid nickname ");
+        }
     }
 
     public int getAge() {

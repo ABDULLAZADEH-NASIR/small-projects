@@ -3,30 +3,27 @@ package Task3;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Family extends Human {
+public class Family  {
 
     static {
         System.out.println("Class Family");
     }
 
-
     {
         System.out.println("Object type Family");
-
     }
 
+    private Human human;
   private  Human mother;
   private Human father;
-  private Human [] children=new Human[2];
+  private Human [] children=new Human[10];
   private Pet pet;
   private static int countFamily=0;
+  private static  int point;
   private int index;
 
 
-
-
   public  Family(){
-
   }
     public  Family(Human father,Human mother){
         this.father=father;
@@ -52,16 +49,20 @@ public class Family extends Human {
         countFamily++;
     }
 
-    public Human[] getChild() {
-        return children;
+    public String getChild(Human child) {
+        return String.format("name=%s, surname=%s, data year=%d",child.getName(),
+                child.getSurname(),child.getDateYear());
+
+        }
+
+    public void setChild(Human child) {
+      addChild(child);
+        countFamily++;
     }
 
-    public void setChild(Human[] child) {
-        this.children = child;
-    }
-
-    public Pet getPet() {
-        return pet;
+    public String getPet(Pet pet) {
+        return String.format("nickname=%s, species=%s, age=%d",pet.getNickname(),
+                pet.getSpecies(),pet.getAge());
     }
 
     public void setPet(Pet pet) {
@@ -83,59 +84,52 @@ public class Family extends Human {
     public  boolean deleteChild(Human child){
         boolean deleted=false;
 
-          for (int i=0;i<children.length;i++){
-
-              if(children[i]==child){
-                  child=null;
-                  index=i;
+          for(int i=0;i<children.length;i++){
+              if(children[i].equals(child)&& children[i]!=null){
+                  children[i]=null;
                   countFamily--;
                   deleted=true;
+                  System.out.println("Child is deleted");
+                  index=i;
                   break;
               }
-
           }
-            Human [] c=new  Human[children.length-1];
-
-          for (int i=0;i<children.length;i++){
-              if(i<index){
-                  c[i]=children[i];
-              }
-              else {
-                  c[i]=children[i+1];
+          for(int i=0;i<children.length;i++){
+              if( i==index &&index!= children.length-1){
+                children[i]=children[i+1];
+                children[i+1]=null;
               }
           }
-
-          children=c;
-
           return deleted;
     }
 
     public  void addChild(Human child){
         boolean isEmpty=false;
         countFamily++;
-        for(Human c: children){
-            if(c==null){
-                c=child;
+            if(point<children.length){
+                children[point]=child;
+                point++;
                 System.out.println("The child was added to the family");
-                break;
             }
             else {
                 isEmpty=true;
             }
-        }
 
-        Human [] c=new  Human[children.length+1];
-
-        for(int i=0;i<c.length;i++){
-            if(i<children.length){
-                c[i]=children[i];
-            }
-            else {
-                c[children.length]=child;
-                System.out.println("The child was added to the family");
-                children=c;
-            }
+        if(isEmpty) {
+            children=Arrays.copyOf(children,children.length*2);
+            children[point]=child;
+            point++;
+            System.out.println("The child was added to the family");
         }
+    }
+    public String seeChildren(){
+      StringBuilder stringBuilder=new StringBuilder("");
+          for(Human h:children){
+              if(h!=null){
+                  stringBuilder.append(h.getName() + " ");
+              }
+          }
+       return String.valueOf(stringBuilder);
     }
 
 
@@ -163,5 +157,5 @@ public class Family extends Human {
     public String toString() {
         return "Family{" +
                 "mother=" + mother.getName() +" "+mother.getSurname()+", father="+ father.getName()+" "+father.getSurname()+
-                ", Children="+ Arrays.toString(children)+", pet="+pet.getNickname() +"}";
+                ", Children="+seeChildren()+", pet="+pet.getNickname() +"}";
 }}
