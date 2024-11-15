@@ -1,3 +1,5 @@
+package task1;
+
 public class Main {
     public static void main(String[] args) {
         Human human=new Human();
@@ -10,7 +12,6 @@ public class Main {
         String [] habits={"eat","drink","sleep"};
 
         Pet dog=new Pet("Pitbull","Rock",5,habits);
-        child.pet=dog;
         System.out.println(dog.trickLevel);
 
 
